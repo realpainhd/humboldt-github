@@ -12,7 +12,7 @@ public class Looping {
 			for (int i = 1; i <= count; i++) {
 				// System.out.println(i);
 				try {
-					pal(BigInteger.valueOf(i), reverse(BigInteger.valueOf(i)));
+					pal(i, reverse(i));
 				} catch (Exception e) {
 					System.out.println(i);
 				}
@@ -22,44 +22,56 @@ public class Looping {
 		// long R = reverse(N);
 		// System.out.println(pal(N,R));
 
+		long N = Integer.parseInt(args[0]);
+		long R = reverse(N);
+		System.out.println(N);
+		System.out.println(R);
+		long t = N + R;
+		System.out.println("Ist die zahl ein Palindrom?: " + checkPal(t));
+
 	}
 
-	public static BigInteger reverse(BigInteger num) {
-		String s1 = num.toString();
+	public static long reverse(long num) {
+		String s1 = Long.toString(num);
 		String s2 = "";
 		for (int i = s1.length() - 1; i >= 0; i--) {
 			s2 += s1.charAt(i);
 		}
 
-		BigInteger numr = BigInteger.ZERO.setBit(128);
+		long numr = 0;
 		try {
-			numr = new BigInteger(s2);
+			numr = Long.parseLong(s2);
 		} catch (NumberFormatException e) {
 
 		}
 
+		numr = Long.parseLong(s2);
+
+
 		return numr;
+
 	}
 
-	public static boolean checkPal(BigInteger t) {
-		BigInteger x = t;
-		BigInteger y = reverse(t);
+	public static boolean checkPal(long t) {
+		long x = t;
+		long y = reverse(t);
 		if (x == y) {
 			return true;
 		}
 		return false;
 	}
 
-	public static boolean pal(BigInteger N, BigInteger R) {
-		BigInteger t = BigInteger.ZERO.setBit(128);
-		t = N.add(R);
+	public static boolean pal(long N, long R) {
+		long t = 0;
+		t = Math.addExact(R, N);
 
-		if (checkPal(N.and(R))) {
+		if (checkPal(Math.addExact(R, N))) {
 			return true;
 		}
-		return pal(N.add(R), reverse(N.add(R)));
-		//need to fix github
+		return pal(Math.addExact(N, R), reverse(Math.addExact(N, R)));
+		
 	}
+
 
 
 }
